@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import it.prova.model.Ruolo;
-import it.prova.model.StatoUtente;
-import it.prova.model.Utente;
+import it.prova.agenda.model.Ruolo;
+import it.prova.agenda.model.StatoUtente;
+import it.prova.agenda.model.Utente;
 
 
 

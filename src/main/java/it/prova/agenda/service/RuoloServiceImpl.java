@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.prova.agenda.model.Ruolo;
 import it.prova.agenda.repository.ruolo.RuoloRepository;
-import it.prova.model.Ruolo;
 
 
 @Service

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import it.prova.model.Ruolo;
+import it.prova.agenda.model.Ruolo;
 
 
 public class RuoloDTO {

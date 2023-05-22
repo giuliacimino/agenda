@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import it.prova.model.StatoUtente;
-import it.prova.model.Utente;
+import it.prova.agenda.model.StatoUtente;
+import it.prova.agenda.model.Utente;
 
 
 public interface UtenteRepository  extends CrudRepository<Utente, Long> {

@@ -1,4 +1,4 @@
-package it.prova.model;
+package it.prova.agenda.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

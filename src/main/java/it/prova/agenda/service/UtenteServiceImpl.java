@@ -8,9 +8,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.prova.agenda.model.StatoUtente;
+import it.prova.agenda.model.Utente;
 import it.prova.agenda.repository.utente.UtenteRepository;
-import it.prova.model.StatoUtente;
-import it.prova.model.Utente;
 
 
 @Service
@@ -30,16 +30,21 @@ public class UtenteServiceImpl implements UtenteService{
 	}
 
 	@Override
+	@Transactional(readOnly = true)
+
 	public Utente caricaSingoloUtente(Long id) {
 		return repository.findById(id).orElse(null);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
+
 	public Utente caricaSingoloUtenteConRuoli(Long id) {
 		return repository.findByIdConRuoli(id).orElse(null);
 	}
 
 	@Override
+	@Transactional
 	public void aggiorna(Utente utenteInstance) {
 		// deve aggiornare solo nome, cognome, username, ruoli
 				Utente utenteReloaded = repository.findById(utenteInstance.getId()).orElse(null);

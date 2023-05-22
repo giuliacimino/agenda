@@ -2,7 +2,7 @@ package it.prova.agenda.service;
 
 import java.util.List;
 
-import it.prova.model.Utente;
+import it.prova.agenda.model.Utente;
 
 
 public interface UtenteService {

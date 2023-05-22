@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import it.prova.agenda.model.Utente;
 import it.prova.agenda.repository.utente.UtenteRepository;
-import it.prova.model.Utente;
 
 
 @Service

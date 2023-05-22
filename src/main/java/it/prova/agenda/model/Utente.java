@@ -1,4 +1,4 @@
-package it.prova.model;
+package it.prova.agenda.model;
 
 import java.time.LocalDate;
 import java.util.HashSet;

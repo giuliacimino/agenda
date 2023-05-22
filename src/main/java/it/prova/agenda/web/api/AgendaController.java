@@ -17,14 +17,15 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.prova.agenda.dto.AgendaDTO;
+import it.prova.agenda.model.Agenda;
+import it.prova.agenda.model.Ruolo;
+import it.prova.agenda.model.Utente;
 import it.prova.agenda.service.AgendaService;
 import it.prova.agenda.service.UtenteService;
 import it.prova.agenda.web.api.exception.AgendaNotFoundException;
 import it.prova.agenda.web.api.exception.IdNotNullForInsertException;
 import it.prova.agenda.web.api.exception.UtenteNotAuthorizedException;
-import it.prova.model.Agenda;
-import it.prova.model.Ruolo;
-import it.prova.model.Utente;
+
 import org.springframework.http.HttpStatus;
 
 

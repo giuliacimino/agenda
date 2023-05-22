@@ -2,7 +2,7 @@ package it.prova.agenda.service;
 
 import java.util.List;
 
-import it.prova.model.Agenda;
+import it.prova.agenda.model.Agenda;
 
 public interface AgendaService {
 	
@@ -17,6 +17,8 @@ public interface AgendaService {
 	Agenda inserisciNuovo(Agenda agendaInstance);
 
 	void rimuovi(Agenda agendaInstance);
+	
+	List<Agenda> cercaPerDescrizione(String descrizione);
 
 
 }

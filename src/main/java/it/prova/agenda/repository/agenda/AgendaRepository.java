@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import it.prova.model.Agenda;
+import it.prova.agenda.model.Agenda;
 
 public interface AgendaRepository extends CrudRepository<Agenda, Long>{
 	
@@ -13,8 +13,10 @@ public interface AgendaRepository extends CrudRepository<Agenda, Long>{
 	List<Agenda> findAllAgendaEager();
 	
 	
-	@Query("select a from Agenda a join fetch a.utente where a.id=?")
+	@Query("select a from Agenda a join fetch a.utente where a.id = :id1")
 	Agenda findSingoloElementoEager(Long id);
+	
+	List<Agenda> findByDescrizione(String descrizione);
 	
 
 }

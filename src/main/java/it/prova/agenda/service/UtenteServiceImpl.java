@@ -1,12 +1,15 @@
 package it.prova.agenda.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.prova.agenda.repository.utente.UtenteRepository;
+import it.prova.model.StatoUtente;
 import it.prova.model.Utente;
 
 
@@ -16,40 +19,52 @@ public class UtenteServiceImpl implements UtenteService{
 	
 	@Autowired
 	private UtenteRepository repository;
+	
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Utente> listAllUtenti() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<Utente>) repository.findAll();
 	}
 
 	@Override
 	public Utente caricaSingoloUtente(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findById(id).orElse(null);
 	}
 
 	@Override
 	public Utente caricaSingoloUtenteConRuoli(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findByIdConRuoli(id).orElse(null);
 	}
 
 	@Override
 	public void aggiorna(Utente utenteInstance) {
-		// TODO Auto-generated method stub
+		// deve aggiornare solo nome, cognome, username, ruoli
+				Utente utenteReloaded = repository.findById(utenteInstance.getId()).orElse(null);
+				if (utenteReloaded == null)
+					throw new RuntimeException("Elemento non trovato");
+				utenteReloaded.setNome(utenteInstance.getNome());
+				utenteReloaded.setCognome(utenteInstance.getCognome());
+				utenteReloaded.setUsername(utenteInstance.getUsername());
+				utenteReloaded.setRuoli(utenteInstance.getRuoli());
+				repository.save(utenteReloaded);
 		
 	}
 
 	@Override
 	public void inserisciNuovo(Utente utenteInstance) {
-		// TODO Auto-generated method stub
+		utenteInstance.setStato(StatoUtente.CREATO);
+		utenteInstance.setPassword(passwordEncoder.encode(utenteInstance.getPassword()));
+		utenteInstance.setDateCreated(LocalDate.now());
+		repository.save(utenteInstance);
 		
 	}
 
 	@Override
 	public void rimuovi(Long idToRemove) {
-		// TODO Auto-generated method stub
+		repository.deleteById(idToRemove);
 		
 	}
 
@@ -61,26 +76,35 @@ public class UtenteServiceImpl implements UtenteService{
 
 	@Override
 	public Utente findByUsernameAndPassword(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findByUsernameAndPassword(username, password);
+
 	}
 
 	@Override
 	public Utente eseguiAccesso(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findByUsernameAndPasswordAndStato(username, password, StatoUtente.ATTIVO);
+
 	}
 
 	@Override
 	public void changeUserAbilitation(Long utenteInstanceId) {
-		// TODO Auto-generated method stub
+		Utente utenteInstance = caricaSingoloUtente(utenteInstanceId);
+		if (utenteInstance == null)
+			throw new RuntimeException("Elemento non trovato.");
+
+		if (utenteInstance.getStato() == null || utenteInstance.getStato().equals(StatoUtente.CREATO))
+			utenteInstance.setStato(StatoUtente.ATTIVO);
+		else if (utenteInstance.getStato().equals(StatoUtente.ATTIVO))
+			utenteInstance.setStato(StatoUtente.DISABILITATO);
+		else if (utenteInstance.getStato().equals(StatoUtente.DISABILITATO))
+			utenteInstance.setStato(StatoUtente.ATTIVO);
 		
 	}
 
 	@Override
 	public Utente findByUsername(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		return repository.findByUsername(username).orElse(null);
+
 	}
 
 

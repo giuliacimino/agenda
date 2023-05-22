@@ -13,46 +13,39 @@ import it.prova.model.Ruolo;
 @Service
 @Transactional(readOnly = true)
 public class RuoloServiceImpl implements RuoloService {
-	
+
 	@Autowired
 	private RuoloRepository ruoloRepository;
 
-	@Override
 	public List<Ruolo> listAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<Ruolo>) ruoloRepository.findAll();
 	}
 
-	@Override
 	public Ruolo caricaSingoloElemento(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return ruoloRepository.findById(id).orElse(null);
 	}
 
-	@Override
+	@Transactional
 	public void aggiorna(Ruolo ruoloInstance) {
-		// TODO Auto-generated method stub
-		
+		ruoloRepository.save(ruoloInstance);
+
 	}
 
-	@Override
+	@Transactional
 	public void inserisciNuovo(Ruolo ruoloInstance) {
-		// TODO Auto-generated method stub
-		
+		ruoloRepository.save(ruoloInstance);
 	}
 
-	@Override
+	@Transactional
 	public void rimuovi(Long idToRemove) {
-		// TODO Auto-generated method stub
-		
+		ruoloRepository.deleteById(idToRemove);
+
+
 	}
 
-	@Override
 	public Ruolo cercaPerDescrizioneECodice(String descrizione, String codice) {
-		// TODO Auto-generated method stub
-		return null;
+		return ruoloRepository.findByDescrizioneAndCodice(descrizione, codice);
 	}
-	
 	
 
 
